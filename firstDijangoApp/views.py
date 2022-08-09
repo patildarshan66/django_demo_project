@@ -51,11 +51,11 @@ def add_student(request):
 class StudentAPI(View):
     def get(self,request,*args, **kwargs):
         json_data = request.body;
-        if json_data is not b'':
+        if json_data != b'':
             stream = io.BytesIO(json_data)
             pythonData = JSONParser().parse(stream)
             id = pythonData.get('id',None)
-            if id is not None:
+            if id != None:
                 stu = Student.objects.get(id=id)
                 seralizer = StudentSerializers(stu)
                 return JsonResponse(seralizer.data)
